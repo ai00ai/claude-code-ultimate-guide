@@ -6,7 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-<!-- New entries go here -->
+### Added
+
+- **Review Plan command template** (`examples/commands/review-plan.md`)
+  - Structured plan review across 4 axes: architecture, code quality, tests, performance
+  - Inspired by Garry Tan's (YC CEO) Plan Mode prompt, adapted for Claude Code's native config system
+  - Includes BIG CHANGE / SMALL CHANGE modes, numbered issues with lettered options, "do nothing" option
+  - Uses AskUserQuestion for structured interaction
+- **Rules templates** (`examples/rules/`) — new directory
+  - `architecture-review.md`: system design, dependencies, data flow, scaling, security
+  - `code-quality-review.md`: organization, DRY violations, error handling, tech debt, engineering balance
+  - `test-review.md`: coverage gaps, test quality, edge cases, failure modes
+  - `performance-review.md`: database access, memory, caching, complexity
 
 ## [3.27.3] - 2026-02-16
 
