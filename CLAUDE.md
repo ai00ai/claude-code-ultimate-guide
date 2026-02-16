@@ -269,7 +269,7 @@ Ce guide fait partie d'un écosystème de 4 repositories interconnectés, sépar
 |--------|---------|
 | **GitHub** | https://github.com/FlorianBruniaux/claude-code-ultimate-guide |
 | **Local** | `/Users/florianbruniaux/Sites/perso/claude-code-ultimate-guide/` |
-| **Contenu** | Guide ~19K lignes, 108 templates, workflows, architecture |
+| **Contenu** | Guide ~19K lignes, 113 templates, workflows, architecture |
 | **Audience** | Développeurs, DevOps, tech leads |
 
 ### 2. Claude Cowork Guide (repo dédié)
