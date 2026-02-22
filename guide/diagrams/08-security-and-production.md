@@ -53,6 +53,19 @@ flowchart LR
     style R2 fill:#E87E2F,color:#fff
     style R3 fill:#E87E2F,color:#fff
     style BLOCKED fill:#7BC47F,color:#333
+
+    click THREAT href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md" "Threat / Attack"
+    click P1 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-1-prevention-before-you-start" "MCP server vetting"
+    click P2 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-1-prevention-before-you-start" "CLAUDE.md restrictions"
+    click P3 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-1-prevention-before-you-start" ".claudeignore"
+    click P4 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-1-prevention-before-you-start" "Minimal permissions"
+    click D1 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-2-detection-while-you-work" "PreToolUse hooks"
+    click D2 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-2-detection-while-you-work" "Audit logs"
+    click D3 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-2-detection-while-you-work" "Anomaly alerts"
+    click R1 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-3-response-when-things-go-wrong" "Sandbox isolation"
+    click R2 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-3-response-when-things-go-wrong" "Permission gates"
+    click R3 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md#part-3-response-when-things-go-wrong" "Rollback capability"
+    click BLOCKED href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/security-hardening.md" "Threat contained"
 ```
 
 <details>
@@ -116,6 +129,21 @@ flowchart TD
     style I fill:#E87E2F,color:#fff
     style J fill:#E87E2F,color:#fff
     style NOTE fill:#F5E6D3,color:#333
+
+    click A href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Using Claude Code"
+    click B href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Running on production server?"
+    click C href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "ALWAYS sandbox"
+    click D href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Executing untrusted code?"
+    click E href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "What platform?"
+    click F href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "macOS Sandbox"
+    click G href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Docker sandbox"
+    click H href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Ephemeral container"
+    click I href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Personal project?"
+    click J href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Comfortable with defaults?"
+    click K href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Default mode"
+    click L href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "acceptEdits mode"
+    click M href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Sandbox recommended"
+    click NOTE href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/sandbox-native.md" "Rule of thumb"
 ```
 
 <details>
@@ -171,6 +199,19 @@ flowchart TD
         style GE fill:#E87E2F,color:#fff
         style GG fill:#6DB3F2,color:#fff
     end
+
+    click BA href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Claude writes code (anti-pattern)"
+    click BB href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Ask Claude to verify"
+    click BC href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Claude says looks good"
+    click BD href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Bug in production"
+    click BE href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Why it fails"
+    click GA href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Claude writes code (best practice)"
+    click GB href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Human reviews critical sections"
+    click GC href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Automated test suite"
+    click GD href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Different tool validates"
+    click GE href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "All checks pass?"
+    click GF href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Safe to deploy"
+    click GG href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/production-safety.md" "Fix before deploy"
 ```
 
 <details>
@@ -226,6 +267,19 @@ flowchart LR
     style OK fill:#7BC47F,color:#333
     style FAIL fill:#E85D5D,color:#fff
     style FIX fill:#F5E6D3,color:#333
+
+    click PR href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "PR Created"
+    click GH href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "GitHub Actions trigger"
+    click ENV href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Set up environment"
+    click CC href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "claude --print --headless"
+    click T1 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Lint check"
+    click T2 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Test suite"
+    click T3 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Security scan"
+    click T4 href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Doc completeness"
+    click AGG href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "All checks pass?"
+    click OK href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Checks green"
+    click FAIL href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Report failures on PR"
+    click FIX href "https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md#93-cicd-integration" "Developer fixes"
 ```
 
 <details>
