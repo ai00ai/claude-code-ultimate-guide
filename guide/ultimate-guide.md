@@ -7483,7 +7483,7 @@ Slash commands are shortcuts for common workflows.
 | `/plan` | Enter Plan Mode |
 | `/rewind` | Undo changes |
 | `/simplify` | Review changed code and fix over-engineering |
-| `/batch` | Process multiple items efficiently |
+| `/batch` | Large-scale changes via parallel worktree agents |
 | `/insights` | Generate usage analytics report |
 | `/exit` | Exit Claude Code |
 
@@ -7774,11 +7774,25 @@ It operates at the architecture and structure level, not at the formatter or lin
 
 ### The /batch Command
 
-Also added in v2.1.63, `/batch` is a bundled slash command for processing multiple items efficiently in a single invocation.
+Added in v2.1.63, `/batch` orchestrates large-scale codebase changes by distributing work across 5–30 parallel agents in isolated git worktrees, each opening its own pull request.
+
+#### How It Works
+
+1. **Research & plan** — analyzes the codebase and breaks the change into independent units
+2. **Parallel execution** — spawns 5–30 isolated git worktree agents simultaneously
+3. **PR per agent** — each agent completes its portion and opens a pull request
+
+#### Usage
 
 ```bash
-/batch
+/batch migrate from react to vue
+/batch replace all uses of lodash with native equivalents
+/batch add type annotations to all JavaScript files
 ```
+
+#### When to Use It
+
+`/batch` is the native equivalent of the parallel worktrees multi-agent pattern (see §15). Use it for large, repetitive, file-level changes that can be split into independent units: migrations, refactors, bulk type annotations, dependency replacements.
 
 > **Note**: Both `/simplify` and `/batch` are bundled slash commands that ship with Claude Code v2.1.63+. No configuration required.
 
