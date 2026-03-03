@@ -12,7 +12,7 @@ tags: [cheatsheet, reference]
 
 **Written with**: Claude (Anthropic)
 
-**Version**: 3.29.2 | **Last Updated**: February 2026
+**Version**: 3.30.0 | **Last Updated**: February 2026
 
 ---
 
@@ -608,4 +608,4 @@ where.exe claude; claude doctor; claude mcp list
 
 **Author**: Florian BRUNIAUX | [@Méthode Aristote](https://methode-aristote.fr) | Written with Claude
 
-*Last updated: February 2026 | Version 3.29.2*
+*Last updated: February 2026 | Version 3.30.0*

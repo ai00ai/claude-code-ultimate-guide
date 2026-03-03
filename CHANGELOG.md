@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [3.30.0] - 2026-03-03
+
+### Added
+
+- **10 patterns avancés documentés** — audit systématique de 10 patterns identifiés chez des praticiens experts, fact-checked via 9 recherches Perplexity (mars 2026). 5 nouveaux fichiers créés, 4 fichiers existants enrichis, 3 sections ajoutées dans le guide principal.
+
+  **Nouveaux fichiers** :
+  - `examples/agents/plan-challenger.md` — agent adversarial pour challenger les plans avant implémentation (+52.8% sécurité, +80% détection bugs, sources : DrillAgent/nsfocusglobal.com, milvus.io)
+  - `examples/agents/adr-writer.md` — agent de génération automatique d'ADRs avec matrice de criticité C1/C2/C3, référence MCP `mcp-adr-analysis-server` (tosin2013/GitHub)
+  - `examples/commands/audit-codebase.md` — commande scoring codebase en 7 catégories (Secrets, Security, Dependencies, Structure, Tests, Imports, AI Patterns), 3 niveaux de sévérité, plan de progression par tiers 5→8→10 (inspiré Variant Systems open-source plugin)
+  - `examples/rules/first-principles.md` — template invariants de session : modèle Contract/Working Set/Noise, thresholds mesurables ("80% minimum" > "bonne couverture"), mitigation du context decay
+  - `guide/workflows/event-driven-agents.md` — workflow complet "événement → agent" : Linear-Driven Agent Loop (Galarza, fév 2026), pattern générique webhook, table événements×agents, guardrails (idempotence, rate limiting, circuit breaker)
+
+  **Modifications guide principal** (`guide/ultimate-guide.md`) :
+  - §3.1 — nouvelle sous-section "Modular Context Architecture" : CLAUDE.md-as-index (<100 lignes), `paths:` frontmatter pour conditional loading, architecture 3 tiers root→rules/→skills/ (feature officielle non documentée)
+  - §9.3 — nouvelle sous-section "Deployment Automation" : briques Vercel (3 variables requises), Infisical comme alternative open-source à Vault, skill deploy, guardrails non-négociables (staging-first, confirmation hook, rollback)
+  - §9.12 (worktrees) — nouvelle sous-section "Coordinating Parallel Worktrees: Task Dependencies" : analyse manuelle des fichiers touchés, `blockedBy` explicite, matrice de décision, référence `coderabbitai/git-worktree-runner`, clarification : détection auto n'existe pas
+
+  **Modifications workflows** :
+  - `guide/workflows/iterative-refinement.md` — section "Community Patterns & Known Limitations" : Ralph Loop (nathanonn.com), Auto-Continue Skill (mcpmarket.com), Stop Hooks integration, stratégie d'escalation post-3-itérations, caveats GitHub issues #28489 et #28843
+  - `guide/workflows/agent-teams.md` — nuance du >5 agents anti-pattern : tableau context window 10K/50K/100K+, model-per-role (feature souhaitée, non supportée API mars 2026), prédiction Gartner 40% enterprise 2026
+
 - **SonnetPlan hack documenté** (`guide/ultimate-guide.md` §OpusPlan Mode) — variante budget Sonnet→Haiku via remap `ANTHROPIC_DEFAULT_OPUS_MODEL` + `ANTHROPIC_DEFAULT_SONNET_MODEL` : fonction shell `sonnetplan()`, routing Plan/Act, caveat self-report non fiable, lien issue GitHub [#9749](https://github.com/anthropics/claude-code/issues/9749). Nouveau template `examples/scripts/sonnetplan.sh` avec instructions d'installation et note de vérification (status bar vs self-report).
 
 - **Auto-memory documentée comme 3e système de mémoire natif** (`guide/ultimate-guide.md` §Session vs Persistent Memory) — passage de 2 à 3 systèmes (session / auto-memory native / Serena MCP), nouveau tableau 5×4, section dédiée "Auto-Memory (native, v2.1.59+)" avec chemin MEMORY.md et gestion `/memory`. Correction : l'ancienne description liait `/memory` à CLAUDE.md (inexact) et ignorait le système natif. Guidance "When to use which" mise à jour.

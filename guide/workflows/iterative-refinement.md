@@ -22,7 +22,8 @@ Prompt, observe, reprompt until satisfied. The core loop of effective AI-assiste
 6. [Script Generation Workflow](#script-generation-workflow)
 7. [Iteration Strategies](#iteration-strategies)
 8. [Anti-Patterns](#anti-patterns)
-9. [See Also](#see-also)
+9. [Community Patterns & Known Limitations](#community-patterns--known-limitations)
+10. [See Also](#see-also)
 
 ---
 
@@ -508,6 +509,124 @@ Almost there. Final polish:
 ```
 Perfect. Commit this as "feat: add debounce utility with full TypeScript support"
 ```
+
+---
+
+## Community Patterns & Known Limitations
+
+The community has built several patterns on top of Claude Code's iterative loop. Some solve real pain points, others expose current limitations worth knowing about.
+
+### Ralph Loop (Test-Driven Autonomous Iteration)
+
+Source: nathanonn.com, February 2026.
+
+The Ralph Loop constrains autonomous iteration to one test case per cycle instead of running the full suite every time. This keeps each cycle focused and prevents the agent from chasing multiple failures at once.
+
+How it works:
+
+1. Pick one failing test case
+2. Fix it, verify it passes
+3. Save progress to a JSON state file
+4. Move to the next failing test case
+5. After 3 failed attempts on the same case, mark it as `known_issue` and skip it
+
+```json
+{
+  "current_case": "test_auth_token_refresh",
+  "attempts": 2,
+  "known_issues": ["test_legacy_migration_edge_case"],
+  "completed": ["test_login", "test_logout", "test_session_timeout"]
+}
+```
+
+The state file is the key innovation here. It survives context resets, `/compact` operations, and even full session restarts. The agent reads the file at the start of each cycle to know exactly where it left off, which cases are done, and which ones to skip.
+
+The 3-attempt limit prevents the infinite loop trap that plagues naive autonomous loops. Rather than burning tokens on a stubborn test case, the agent moves forward and flags the issue for human review later.
+
+### Auto-Continue Skill
+
+Source: mcpmarket.com.
+
+A confidence-based continuation system that decides whether the agent should keep going or stop for human input. Instead of a fixed iteration count, it evaluates the situation after each cycle:
+
+**Auto-continues when**:
+- Tests pass
+- Build succeeds
+- No new error types detected
+- Confidence score remains above threshold
+
+**Stops for human input when**:
+- Confidence drops below threshold
+- A new category of error appears (not just a new instance of a known error)
+- Build or type-check fails in a way the agent hasn't seen before
+
+This pairs well with Claude Code's Stop hooks. The skill can trigger post-task verification and decide whether to resume based on the results.
+
+### Stop Hooks for Automatic Verification
+
+A pattern that turns Claude Code's hook system into an automatic quality gate between iterations:
+
+1. Claude finishes a task (or an iteration)
+2. A `PostToolUse` hook on `TodoWrite` triggers a verification script
+3. The script runs type-check, lint, and tests
+4. Errors get piped back to Claude automatically
+5. Claude fixes the issues without human intervention
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "TodoWrite",
+        "command": "bash -c 'npm run typecheck 2>&1; npm run lint 2>&1; npm test 2>&1'"
+      }
+    ]
+  }
+}
+```
+
+The hook fires every time Claude marks a task as done. If the verification catches something, Claude sees the output and can self-correct before moving to the next task.
+
+### Escalation Strategy
+
+What to do when 3 iterations fail on the same problem. Instead of looping forever or giving up, follow a structured escalation path:
+
+1. **Decompose**: Break the failing task into 2-3 smaller sub-tasks that can be tackled independently
+2. **Collect context**: Dump all error messages, stack traces, and attempted fixes into a structured file
+3. **Model escalation**: If using Sonnet, retry the specific failing case with Opus for deeper reasoning
+4. **Human escalation**: If the model upgrade doesn't help, create a GitHub issue with the full error context and mark the task as `known_issue`
+
+```bash
+# Escalation in practice
+if [ "$ATTEMPT_COUNT" -ge 3 ]; then
+    # Collect context
+    cat errors.log attempts.log > escalation-context.md
+
+    # Try with Opus
+    claude --model claude-opus-4-6 \
+        "Fix this failing test. Context: $(cat escalation-context.md)"
+
+    # If still failing, create issue
+    if [ $? -ne 0 ]; then
+        gh issue create \
+            --title "Auto-escalation: $TEST_NAME fails after 3 attempts" \
+            --body "$(cat escalation-context.md)" \
+            --label "known_issue,needs-human"
+    fi
+fi
+```
+
+The goal is never to silently drop work. Every failure either gets resolved, escalated, or explicitly tracked.
+
+### Known Limitations
+
+Being honest about what doesn't work yet, so you don't waste time reinventing solutions that don't exist.
+
+**No built-in retry/verify/resume** (GitHub issue #28489): Headless automation in Claude Code lacks native support for retry logic, verification gates, and session resumption. Every team implementing autonomous loops builds their own version of this. State files, hook-based verification, and escalation scripts are all community workarounds for a gap in the platform.
+
+**Agent iterations can be lost** (GitHub issue #28843): In multi-day workflows, agent iterations and their accumulated context can be destroyed. If you're running a workflow that spans multiple sessions or days, save explicit state files every N iterations. Do not rely on Claude's conversation memory as your only source of truth.
+
+**Multi-day workflow fragility**: Long-running automation needs checkpointing discipline. Save state to disk (JSON files, git commits, issue comments) at regular intervals. The pattern is simple but easy to forget: if you can't reconstruct the agent's progress from files on disk alone, your workflow will break on session boundaries.
 
 ---
 
