@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [3.30.2] - 2026-03-05
+
 ### Documentation
 
 - **Conductor section enriched** (`guide/third-party-tools.md:376`) — section rewritten from 5 generic bullets to 6 structured subsections, verified against official changelog (conductor.build). Added: workspace status system (backlog → done, v0.35.0), Next Workspace button for agent queue navigation (v0.36.4), turn-by-turn diff viewer (v0.22.0), Manual Mode built-in editor replacing VSCode for quick edits (v0.37.0), full GitHub/CI integration details (Actions tab v0.33.2, failing CI → Claude auto-fix v0.12.0, PR workflow with `⌘⇧P`), Linear deeplinks, Codex support alongside Claude, Melty Labs attribution. Community workflow pattern added: 5+ parallel features across multiple repos, BMAD + Conductor combo for spec-driven development (user-reported, unverified claim clearly marked).
