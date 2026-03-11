@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [3.34.0] - 2026-03-11
+
+### Added
+
+- **Context Engineering Configurator** (`cc.bruniaux.com/context/`) — Interactive multi-step configurator that generates a personalized CLAUDE.md starter kit. 5-screen flow: profile (team size, AI tools), current state (existing CLAUDE.md, rules files), stack (language, frontend), results (generated artifacts + maturity assessment). Features: generated CLAUDE.md preview with copy-to-clipboard, Profile YAML for team setups, maturity badge (Level 1-5), personalized next-steps roadmap, localStorage persistence. Vanilla JS, no framework. Nav: added "Context" to landing header dropdown.
+
+- **`guide/core/context-engineering.md`** — New consolidated reference (1,188 lines) covering all context engineering concepts. 8 sections: (1) What is Context Engineering (Karpathy's definition, prompt vs. context engineering distinction, three-layer model); (2) The Context Budget (token math, 150-instruction ceiling, HumanLayer 15-25% adherence data, path-scoping efficiency, overload signs); (3) Configuration Hierarchy (global/project/session split, decision tree for rule placement, override semantics); (4) Modular Architecture (path-scoping, skills vs. rules distinction, progressive disclosure, anti-pattern: monolithic CLAUDE.md); (5) Team Assembly (N×M×P problem, profile YAML, assembly workflow, CI drift detection, module library structure); (6) Context Lifecycle (instruction debt, update loop, knowledge feeding, ACE pipeline, session retrospective); (7) Quality Measurement (self-evaluation questions, canary checks, adherence tracking, context debt score formula); (8) Context Reduction Techniques (path-scoping -40-50%, negative constraints +15-25%, rule compression, deduplication, archive pattern).
+
+- **`examples/context-engineering/`** — 10 production-ready templates: `README.md` (overview + quick start), `profile-template.yaml` (developer profile for context assembly), `skeleton-template.md` (CLAUDE.md skeleton with filled placeholders), `assembler.ts` (~240-line TypeScript script for profile-based assembly with @import resolution, dry-run support, token estimation), `eval-questions.yaml` (20 self-evaluation questions across 4 dimensions), `canary-check.sh` (5-check behavioral regression script), `ci-drift-check.yml` (weekly GitHub Actions drift detection with auto-issue creation), `context-budget-calculator.sh` (measures always-on token cost), `rules/knowledge-feeding.md` (proactive context update protocol), `rules/update-loop-retro.md` (session retrospective template).
+
+- **`tools/context-audit-prompt.md`** — Self-contained context audit prompt (543 lines) following `audit-prompt.md` pattern. Scores context engineering setup /100 across 8 dimensions: Size & Budget (15 pts), Structure (15 pts), Path-Scoping (12 pts), Rule Quality (15 pts), Freshness (12 pts), Team Readiness (10 pts), Conflict Detection (11 pts), Knowledge Loop (10 pts). Includes 3 bash scan phases, report format with context budget breakdown, 5-level maturity ladder, and ready-to-use paste improvements.
+
+- **`src/data/context-data.ts`** (landing) — TypeScript data file with all configurator types, option arrays (team size, AI tools, stack, frontend), maturity level definitions (5 levels: Starter/Modular/Team-Ready/Measured/Adaptive), and template generators (`generateClaudeMd`, `generateProfileYaml`, `calculateMaturityLevel`).
+
+### Updated
+
+- **`guide/README.md`** — Added `core/context-engineering.md` row to Core Reference table.
+- **`machine-readable/reference.yaml`** — Added 24 context engineering entries with paths to guide, examples, tools, and landing configurator.
+- **`src/components/global/Header.astro`** (landing) — Added "Context" to moreLinks dropdown.
+
 ## [3.33.1] - 2026-03-10
 
 ### Updated
