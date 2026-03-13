@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Documentation
+
+- **Claude Code Releases**: Updated tracking to v2.1.75
+  - 1M context window for Opus 4.6 now default for Max, Team, Enterprise (no extra usage required)
+  - Session name display on prompt bar with `/rename`; hook source in permission prompts
+  - Fixed token estimation over-counting for thinking/tool_use blocks (premature compaction fix)
+  - Fixed Bash tool mangling `!` in piped commands
+
 ## [3.35.0] - 2026-03-13
 
 ### Added

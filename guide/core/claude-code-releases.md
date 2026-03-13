@@ -10,13 +10,13 @@ tags: [reference, release]
 > **Full details**: [github.com/anthropics/claude-code/CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
 > **Machine-readable**: [claude-code-releases.yaml](../machine-readable/claude-code-releases.yaml)
 
-**Latest**: v2.1.74 | **Updated**: 2026-03-12
+**Latest**: v2.1.75 | **Updated**: 2026-03-13
 
 ---
 
 ## Quick Jump
 
-- [2.1.x Series (January-March 2026)](#21x-series-january-march-2026) — Worktree isolation, background agents, ConfigChange hook, Fast mode Opus 4.6, 1M context, claude.ai MCP connectors, remote-control, auto-memory, /copy command, HTTP hooks, worktree config sharing, ultrathink re-introduced, InstructionsLoaded hook, 4 security fixes, Agent model override restored, 12x SDK token cost reduction, /context actionable suggestions, modelOverrides setting
+- [2.1.x Series (January-March 2026)](#21x-series-january-march-2026) — Worktree isolation, background agents, ConfigChange hook, Fast mode Opus 4.6, 1M context, claude.ai MCP connectors, remote-control, auto-memory, /copy command, HTTP hooks, worktree config sharing, ultrathink re-introduced, InstructionsLoaded hook, 4 security fixes, Agent model override restored, 12x SDK token cost reduction, /context actionable suggestions, modelOverrides setting, 1M context Opus 4.6 default for Max/Team/Enterprise
 - [2.0.x Series (Nov 2025 - Jan 2026)](#20x-series-november-2025---january-2026) — Opus 4.5, Claude in Chrome, Background agents
 - [Breaking Changes Summary](#breaking-changes-summary)
 - [Milestone Features](#milestone-features)
@@ -24,6 +24,24 @@ tags: [reference, release]
 ---
 
 ## 2.1.x Series (January-March 2026)
+
+### v2.1.75 (2026-03-13)
+
+- **New**: ⭐ 1M context window for Opus 4.6 now enabled by default for Max, Team, and Enterprise plans (previously required extra usage)
+- **New**: Session name display on the prompt bar when using `/rename`
+- **New**: Last-modified timestamps on memory files — helps Claude reason about freshness of memories
+- **New**: Hook source display (settings/plugin/skill) in permission prompts when a hook requires confirmation
+- **New**: `/color` command available for all users to set a prompt-bar color
+- **Fixed**: Token estimation over-counting for thinking and `tool_use` blocks (was causing premature context compaction)
+- **Fixed**: Bash tool mangling `!` in piped commands (e.g. `jq 'select(.x != .y)'` now works correctly)
+- **Fixed**: Voice mode not activating correctly on fresh installs without toggling `/voice` twice
+- **Fixed**: Claude Code header not updating model name after switching with `/model` or Option+P
+- **Fixed**: Session crash when attachment message computation returns undefined values
+- **Fixed**: Managed-disabled plugins showing up in `/plugin` Installed tab
+- **Fixed**: Corrupted marketplace config path handling
+- **Fixed**: `/resume` losing session names after resuming a forked or continued session
+- **Improved**: Startup performance on macOS non-MDM machines (skips unnecessary subprocess spawns)
+- **Improved**: Async hook completion messages suppressed by default (visible with `--verbose` or transcript mode)
 
 ### v2.1.74 (2026-03-12)
 

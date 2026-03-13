@@ -3,8 +3,8 @@
 # Purpose: Track Claude Code product releases for documentation sync
 # Maintained: Manual updates when new releases are announced
 
-latest: "2.1.74"
-updated: "2026-03-12"
+latest: "2.1.75"
+updated: "2026-03-13"
 
 # ════════════════════════════════════════════════════════════════
 # RELEASES (newest first, condensed highlights only)
@@ -14,6 +14,17 @@ releases:
   # ─────────────────────────────────────────────────────────────
   # 2.1.x Series (January-March 2026)
   # ─────────────────────────────────────────────────────────────
+
+  - version: "2.1.75"
+    date: "2026-03-13"
+    highlights:
+      - "⭐ 1M context window for Opus 4.6 now default for Max, Team, and Enterprise (no extra usage required)"
+      - "Session name display on prompt bar when using /rename"
+      - "Last-modified timestamps on memory files; hook source displayed in permission prompts"
+      - "Fixed token estimation over-counting for thinking/tool_use blocks (prevented premature compaction)"
+      - "Fixed Bash tool mangling ! in piped commands (e.g. jq 'select(.x != .y)')"
+      - "Improved startup performance on macOS non-MDM machines"
+    breaking: []
 
   - version: "2.1.74"
     date: "2026-03-12"
