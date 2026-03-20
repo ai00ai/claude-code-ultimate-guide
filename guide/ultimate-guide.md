@@ -7144,7 +7144,9 @@ skills-ref validate ./my-skill      # Check frontmatter + naming conventions
 skills-ref to-prompt ./my-skill     # Generate <available_skills> XML for agent prompts
 ```
 
-> **Beyond spec validation**: `/audit-agents-skills` extends frontmatter checks with content quality, design patterns, and production readiness scoring. Works on both skills and agents together with weighted criteria (32 points max per file).
+> **Beyond spec validation**: Two complementary audit tools:
+> - `/audit-agents-skills` — broad quality audit across agents, skills, AND commands (16 criteria, 32-pt weighted grading). Use for general production readiness.
+> - `/eval-skills` — skills-only audit with effort-level inference engine. Discovers all skills, infers the appropriate `effort` level from content analysis, flags mismatches, and prints copy-paste ready frontmatter patches. Use when adding `effort` fields to an existing library or auditing a new project. See `examples/skills/eval-skills/`.
 
 ### Skill Quality Gates
 
