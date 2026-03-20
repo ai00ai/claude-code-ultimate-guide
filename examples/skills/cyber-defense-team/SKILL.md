@@ -7,6 +7,7 @@ args:
   - name: log_path
     description: Path to the log file to analyze (or paste log content directly)
     required: true
+effort: high
 ---
 
 # Cyber Defense Team Skill

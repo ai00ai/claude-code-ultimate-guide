@@ -1,6 +1,7 @@
 ---
 name: security-checklist
 description: Comprehensive security checklist for web applications
+effort: medium
 ---
 
 # Security Checklist Skill

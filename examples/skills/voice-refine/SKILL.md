@@ -4,6 +4,7 @@ description: "Transform verbose voice input into structured, token-efficient Cla
 allowed-tools: Read
 context: inherit
 agent: specialist
+effort: low
 ---
 
 # Voice Refine Skill

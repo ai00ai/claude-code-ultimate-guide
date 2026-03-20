@@ -3,6 +3,7 @@ name: talk-stage1-extract
 description: "Extracts and structures source material (articles, transcripts, notes) into a talk summary with narrative arc, themes, metrics, and gaps. Auto-detects REX vs Concept type. Use when starting a new talk from any source material or auditing existing material before committing to a talk."
 tags: [talk, pipeline, presentation, stage-1]
 allowed-tools: "Write, Read, AskUserQuestion"
+effort: medium
 ---
 
 # Talk Stage 1: Extract

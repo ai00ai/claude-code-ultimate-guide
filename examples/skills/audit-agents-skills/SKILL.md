@@ -6,6 +6,7 @@ context: inherit
 agent: specialist
 version: 1.0.0
 tags: [quality, audit, agents, skills, validation, production-readiness]
+effort: high
 ---
 
 # Audit Agents/Skills/Commands (Advanced Skill)

@@ -3090,6 +3090,43 @@ The `effort` parameter (Opus 4.6 API) controls the model's **overall computation
 
 ---
 
+### Per-Skill Effort Allocation (v2.1.80+)
+
+Skills can declare their own effort level in frontmatter. The skill's value overrides the session setting for the duration of that skill's execution, then reverts. This eliminates the need to manually toggle effort between mechanical and analytical tasks.
+
+```yaml
+# Mechanical skill — always fast, never wastes reasoning budget
+---
+name: release
+description: Bump version, update CHANGELOG, commit, push
+effort: low
+---
+
+# Analytical skill — always deep, regardless of session setting
+---
+name: architecture-review
+description: Full architectural analysis with trade-off evaluation
+effort: high
+---
+```
+
+**Decision table for common skill types:**
+
+| Skill type | Recommended effort | Reasoning |
+|------------|--------------------|-----------|
+| Commit, push, sync | `low` | Sequential steps, no design decisions |
+| Changelog, release notes | `low` | Reads git + formats, mécanique |
+| Scaffolding, boilerplate | `low` | Template instantiation |
+| Code review (single PR) | `medium` | Pattern recognition, bounded scope |
+| Issue triage, backlog | `medium` | Categorization + some analysis |
+| Security audit | `high` | Threat modeling, adversarial thinking |
+| Architecture review | `high` | Design decisions, cross-component reasoning |
+| Multi-agent orchestration | `high` | Coordination + planning |
+
+> **Cost model**: `low` effort means fewer tool calls, no preamble, direct output. `high` effort means more tool calls with explanations, detailed summaries, deeper exploration. Match effort to where analysis adds value — not to "effort = quality" uniformly.
+
+---
+
 ### Model per Agent Patterns
 
 Assign models to agents based on **role**, not importance:
@@ -7056,7 +7093,30 @@ allowed-tools: Read Grep Bash
 | `license` | [agentskills.io](https://agentskills.io) | License name or reference to bundled file |
 | `compatibility` | [agentskills.io](https://agentskills.io) | Environment requirements (max 500 chars) |
 | `metadata` | [agentskills.io](https://agentskills.io) | Arbitrary key-value pairs (author, version, etc.) |
+| `effort` | **CC only** (v2.1.80+) | `low\|medium\|high` — overrides the session effort level when this skill is invoked. Set `low` for mechanical tasks (commit, format, scaffold), `high` for analysis or architectural reasoning. |
 | `disable-model-invocation` | **CC only** | `true` to make skill manual-only (workflow with side effects) |
+
+**`effort` per skill** (v2.1.80+) — override the session effort level for a specific skill invocation. Independent of `effortLevel` in settings.json: the skill's value takes precedence only while that skill runs, then reverts.
+
+```yaml
+---
+name: security-audit
+description: Deep security analysis with threat modeling
+effort: high      # Always high effort, regardless of session setting
+allowed-tools: Read Grep Glob Bash
+---
+```
+
+```yaml
+---
+name: commit
+description: Stage and commit changes with conventional format
+effort: low       # Mechanical — no reasoning budget needed
+allowed-tools: Bash
+---
+```
+
+**Why it matters**: Effort controls thinking depth, tool call verbosity, and analysis depth — not just tokens. A `low` effort skill runs faster and cheaper. A `high` effort skill reasons deeper without the user having to manually adjust the session setting. This enables automatic cognitive budget allocation per task type: pay for reasoning only where it adds value.
 
 **`allowed-tools` wildcard scoping** — limit a skill to specific command namespaces rather than opening full Bash access:
 

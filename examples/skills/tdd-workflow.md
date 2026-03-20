@@ -1,6 +1,7 @@
 ---
 name: tdd-workflow
 description: Test-Driven Development workflow and best practices
+effort: low
 ---
 
 # TDD Workflow Skill

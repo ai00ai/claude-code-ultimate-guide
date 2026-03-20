@@ -4,6 +4,7 @@ description: "Detect, suggest, and evaluate GoF design patterns in TypeScript/Ja
 allowed-tools: Read, Grep, Glob, mcp__grepai__grepai_search
 context: fork
 agent: specialist
+effort: high
 ---
 
 # Design Patterns Analyzer Skill

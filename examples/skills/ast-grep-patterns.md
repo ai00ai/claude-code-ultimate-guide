@@ -1,6 +1,7 @@
 ---
 name: ast-grep-patterns
 description: "Skill teaching Claude when and how to use ast-grep for structural code searches"
+effort: low
 ---
 
 # ast-grep Patterns for Claude Code

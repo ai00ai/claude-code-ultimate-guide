@@ -3,6 +3,7 @@ name: talk-pipeline
 description: "Orchestrates the complete talk preparation pipeline from raw material to revision sheets, running 6 stages in sequence with human-in-the-loop checkpoints for REX or Concept mode talks. Use when starting a new talk pipeline, resuming a pipeline from a specific stage, or running the full end-to-end preparation workflow."
 tags: [talk, pipeline, presentation, orchestrator]
 allowed-tools: "Write, Read, AskUserQuestion, Task"
+effort: medium
 ---
 
 # Talk Pipeline Orchestrator

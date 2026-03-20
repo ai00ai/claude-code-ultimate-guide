@@ -1,6 +1,7 @@
 ---
 name: pdf-generator
 description: Generate professional PDFs using Quarto/Typst stack with modern design template
+effort: low
 version: 1.0.0
 ---
 

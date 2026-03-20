@@ -242,8 +242,11 @@ Model: Sonnet | Ctx: 89.5k | Cost: $2.11 | Ctx(u): 56.0%
 | **`/model` slider** | Left/right arrows: `low\|medium\|high` | Session |
 | **`CLAUDE_CODE_EFFORT_LEVEL`** | Env var: `low\|medium\|high` | Shell session |
 | **`effortLevel` setting** | In settings.json: `low\|medium\|high` | Permanent |
+| **`effort` in skill frontmatter** (v2.1.80+) | Per-skill override: `low\|medium\|high` | Per invocation |
 
 **Cost tip**: For simple tasks, Alt+T to disable thinking → faster & cheaper.
+
+**Per-skill effort** — add `effort: low` to mechanical skills (commit, sync, scaffold) and `effort: high` to analytical ones (security-audit, architecture-review). Overrides session setting automatically.
 
 **OpusPlan workflow**: `/model opusplan` → `Shift+Tab × 2` (plan with Opus) → `Shift+Tab` (execute with Sonnet)
 

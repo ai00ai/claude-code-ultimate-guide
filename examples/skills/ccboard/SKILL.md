@@ -5,6 +5,7 @@ version: 0.1.0
 category: monitoring
 keywords: [dashboard, tui, mcp, sessions, costs, analytics]
 tags: [dashboard, tui, monitoring, claude-code, costs]
+effort: low
 ---
 
 # ccboard - Claude Code Dashboard
