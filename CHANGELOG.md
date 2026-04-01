@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- **`/methodology-advisor` command**: New slash command that reads the codebase silently (contributors, test maturity, spec files, LLM signals, file count) and asks only 3 targeted questions to recommend one of 8 methodology stacks — with contextual quick start using real project paths. Available in `examples/commands/methodology-advisor.md`.
+
 - **Methodology Quiz (landing)**: New `/methodologies/` page on `cc.bruniaux.com`. Interactive 12-question quiz recommends one of 8 methodology stacks based on team size, project stage, session style, test maturity, and more. Full decision matrix with Combination Patterns table, two-axis map, and 8 stack cards with quick-start prompts. Linked from home page Methodologies section, header nav, footer, and sitemap.
 
 - **Methodology Map**: Added 2D positioning diagram to `guide/core/methodologies.md` (between Decision Tree and The 15 Methodologies sections). Maps all 20 methodologies on Spec-First/Code-First (Y) vs Lean/Enterprise (X) axes, with quadrant labels and reading guide. Synced to landing guide reader.
