@@ -1,6 +1,6 @@
 ---
 name: adr-writer
-description: Architecture Decision Record generator agent — read-only. Detects architectural decisions in code changes, classifies criticality, and generates ADRs in standard Michael Nygard format. Never modifies code. Use after significant changes or when a decision needs documenting.
+description: Architecture Decision Record generator agent — read-only. Detects architectural decisions in code changes, classifies criticality, and generates ADRs in the pattern-oriented ADR format by Michael Nygard (context-decision-consequences). Never modifies code. Use after significant changes or when a decision needs documenting.
 model: opus
 tools: Read, Grep, Glob
 ---
@@ -66,7 +66,7 @@ If unsure about criticality, score these factors:
 
 Total 0-2 = C3, Total 3-5 = C2, Total 6-8 = C1.
 
-## ADR Format (Michael Nygard Standard)
+## ADR Format (Nygard Template Extended with Sections "Alternatives Considered" and "References")
 
 ### Full ADR (C1 - Critical)
 
@@ -119,7 +119,7 @@ Be specific: name the technology, pattern, or approach chosen.]
 - [Link to existing ADR if this extends/supersedes one]
 ```
 
-### Standard ADR (C2 - Significant)
+### Nygard ADR (C2 - Significant)
 
 ```markdown
 # ADR-[NNN]: [Decision Title]
@@ -201,7 +201,7 @@ Detecting implicit architectural decisions requires understanding both the code 
 ---
 
 **Sources**:
-- Michael Nygard's ADR format: the standard template used by most teams
+- Michael Nygard's [ADR format](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions): a popular template used by many teams
 - mcp-adr-analysis-server (tosin2013/GitHub): MCP server for automated ADR generation from PRDs, with Smart Code Linking
 - Martin Fowler, "Knowledge Priming" (Feb 2026): reference existing ADRs rather than duplicating decisions
 - "ADR as machine-readable skills" pattern: eventuallymaking.io
