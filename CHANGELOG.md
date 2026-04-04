@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [3.38.4] - 2026-04-04
+
+### Documentation
+
+- **Claude Code Releases**: Updated tracking to v2.1.92
+  - Interactive Bedrock setup wizard from login screen (AWS auth, region, credential verification, model pinning)
+  - `forceRemoteSettingsRefresh` policy setting — fail-closed managed settings enforcement
+  - Per-model and cache-hit breakdown in `/cost` for subscription users
+  - `/release-notes` now an interactive version picker
+  - Linux sandbox `apply-seccomp` helper fix (npm + native builds)
+  - Removed `/tag` and `/vim` commands
+
 ### Quiz
 
 - **Quiz expanded from 271 to 334 questions (+63 questions, 16 categories)**: Comprehensive update covering v3.34.10 → v3.38.3 guide changes.

@@ -3,8 +3,8 @@
 # Purpose: Track Claude Code product releases for documentation sync
 # Maintained: Manual updates when new releases are announced
 
-latest: "2.1.91"
-updated: "2026-04-03"
+latest: "2.1.92"
+updated: "2026-04-04"
 
 # ════════════════════════════════════════════════════════════════
 # RELEASES (newest first, condensed highlights only)
@@ -14,6 +14,16 @@ releases:
   # ─────────────────────────────────────────────────────────────
   # 2.1.x Series (January-April 2026)
   # ─────────────────────────────────────────────────────────────
+
+  - version: "2.1.92"
+    date: "2026-04-04"
+    highlights:
+      - "⭐ Interactive Bedrock setup wizard from login screen — guides through AWS auth, region config, credential verification, and model pinning"
+      - "forceRemoteSettingsRefresh policy setting — blocks startup until managed settings freshly fetched, exits if fetch fails (fail-closed)"
+      - "Per-model and cache-hit breakdown in /cost for subscription users"
+      - "/release-notes is now an interactive version picker"
+      - "Linux sandbox: apply-seccomp helper now in both npm and native builds — restores unix-socket blocking for sandboxed commands"
+      - "Removed /tag and /vim commands (vim mode now via /config → Editor mode)"
 
   - version: "2.1.91"
     date: "2026-04-03"
