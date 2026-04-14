@@ -36,21 +36,27 @@ Tracks all external sources that mention the Claude Code Ultimate Guide (GitHub 
 
 | Platform | Count |
 |---|---|
-| Articles / blogs | 5 |
+| Articles / blogs | 9 |
+| Videos (YouTube) | 2 |
 | Podcasts | 1 |
 | Reddit | 3 |
 | LinkedIn (own) | 2 |
 | LinkedIn (third-party) | 5 |
 | Twitter / X | 2 |
 | Instagram | 1 |
-| Directories / registries | 6 |
-| **Total** | **25** |
+| Directories / registries | 7 |
+| Forums (HN) | 1 |
+| **Total** | **33** |
 
 ### Languages spotted
 
 | Language | Mentions |
 |---|---|
-| English | 20 |
+| English | 28 |
 | French | 3 |
 | Spanish | 1 |
-| Unknown | 1 |
+| Korean | 1 |
+
+## Slash command
+
+Run `/track-mentions` to search for new mentions via Perplexity and update this file automatically.

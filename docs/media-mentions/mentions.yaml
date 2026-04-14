@@ -1,6 +1,6 @@
 meta:
   last_updated: "2026-04-14"
-  total_mentions: 25
+  total_mentions: 33
   notes: >
     Source of truth for all external mentions of the Claude Code Ultimate Guide
     (GitHub + cc.bruniaux.com). Add new entries as you discover them.
@@ -328,5 +328,109 @@ mentions:
     reach: unknown
     status: active
     notes: "Substack newsletter. Guide cited as prerequisite, not just resource — stronger framing."
+    first_seen: "2026-04-14"
+
+  # ─── Video ────────────────────────────────────────────────────────────────
+
+  - id: "026"
+    platform: video
+    url: "https://www.youtube.com/watch?v=-8JTwRH23VY"
+    title: "Claude Code Ultimate Guide (Triple Your Productivity)"
+    author: "노마드 코더 Nomad Coders (YouTube)"
+    date: null
+    angle: "Full walkthrough of the guide: installation, /init, CLAUDE.md, operating modes. Named after the guide itself."
+    reach: high
+    status: active
+    notes: "110K views. Korean dev channel with large audience. Title is literally the guide name."
+    first_seen: "2026-04-14"
+
+  - id: "027"
+    platform: video
+    url: "https://www.youtube.com/watch?v=KjEFy5wjFQg"
+    title: "Top 10 Claude Code Skills, Plugins & CLIs (April 2026)"
+    author: "Chase AI (YouTube)"
+    date: "2026-04-01"
+    angle: "Synthesizes current Claude Code ecosystem best practices — guide included as top resource"
+    reach: unknown
+    status: active
+    notes: "April 2026 content. Guide appears in top 10 Claude Code skills ranking."
+    first_seen: "2026-04-14"
+
+  # ─── Directories (new) ────────────────────────────────────────────────────
+
+  - id: "028"
+    platform: directory
+    url: "https://cultofclaude.com/skills/claude-code-ultimate-guide"
+    title: "Cult of Claude — Claude Code Ultimate Guide skill"
+    author: "Cult of Claude"
+    date: null
+    angle: "'6 months of daily practice distilled — teaches the WHY, not just the what. From core concepts to production security.'"
+    reach: unknown
+    status: active
+    notes: "Packaged as an installable Claude Code skill. Best quote about the guide found so far."
+    first_seen: "2026-04-14"
+
+  # ─── Articles (new) ───────────────────────────────────────────────────────
+
+  - id: "029"
+    platform: article
+    url: "https://dev.to/colocodes/claude-code-crash-course-m3o"
+    title: "Claude Code Crash Course"
+    author: "colocodes (DEV Community)"
+    date: null
+    angle: "Uses the guide's mental model (CLAUDE.md, rules, skills, hooks, subagents, MCP) as the conceptual framework for the entire crash course"
+    reach: unknown
+    status: active
+    notes: "DEV Community article. Guide's architecture directly frames the tutorial structure."
+    first_seen: "2026-04-14"
+
+  - id: "030"
+    platform: article
+    url: "https://ranthebuilder.cloud/blog/claude-code-best-practices-lessons-from-real-projects/"
+    title: "Claude Code Best Practices: Lessons From Real Projects"
+    author: "ranthebuilder.cloud"
+    date: null
+    angle: "Explicitly follows guide's CLAUDE.md recommendations: project overview, tech stack, key commands, conventions, <200 lines rule, linked skills"
+    reach: unknown
+    status: active
+    notes: "Practitioner blog post. Implements guide recommendations in production context."
+    first_seen: "2026-04-14"
+
+  - id: "031"
+    platform: article
+    url: "https://paulgp.substack.com/p/getting-started-with-claude-code"
+    title: "Getting Started with Claude Code: A Researcher's Setup Guide"
+    author: "Paul Goldsmith-Pinkham (Substack)"
+    date: null
+    angle: "Treats the guide as primary reference for structured onboarding — positions it as authoritative for technical professionals"
+    reach: unknown
+    status: active
+    notes: "Academic / researcher audience. Strong signal: guide used as onboarding reference for professionals."
+    first_seen: "2026-04-14"
+
+  - id: "032"
+    platform: article
+    url: "https://institute.sfeir.com/en/claude-code/claude-code-resources/versus/"
+    title: "Claude Code - Comparison"
+    author: "SFEIR Institute"
+    date: null
+    angle: "Uses the guide's characterization of Claude Code (agentic terminal mode, complex multi-file tasks) as the standard comparative framework vs. Copilot and Cursor"
+    reach: unknown
+    status: active
+    notes: "SFEIR is a major French tech consultancy / training org. High-credibility institutional mention."
+    first_seen: "2026-04-14"
+
+  # ─── Forum ────────────────────────────────────────────────────────────────
+
+  - id: "033"
+    platform: forum
+    url: "https://news.ycombinator.com/item?id=47495527"
+    title: "Claude Code Cheat Sheet — Hacker News"
+    author: "HN community"
+    date: null
+    angle: "HN thread discussing Claude Code cheatsheet — community references cc.bruniaux.com cheatsheet and worktree/subagents workflows from the guide"
+    reach: medium
+    status: active
+    notes: "HN audience = high-quality signal. Thread title matches our cheatsheet page."
     first_seen: "2026-04-14"
 
