@@ -10,13 +10,13 @@
 
 - Title: Claude Code Ultimate Guide
 - Author: Florian Bruniaux (Founding Engineer @ Méthode Aristote)
-- Version: 3.38.17
+- Version: 3.39.0
 - Last Updated: April 16, 2026
 - License: CC BY-SA 4.0
 - Repository: https://github.com/FlorianBruniaux/claude-code-ultimate-guide
 - Landing: https://cc.bruniaux.com
-- Lines of Documentation: 24,800+
-- Production Templates: 240
+- Lines of Documentation: 25,100+
+- Production Templates: 246
 - Quiz Questions: 334
 - Whitepapers: 9 titles (FR + EN)
 
@@ -314,7 +314,7 @@ Deep analysis     → Use Opus (thinking on by default)
 
 ---
 
-## Template Library (240 templates)
+## Template Library (246 templates)
 
 ### Agents (16 files + sub-projects)
 - `adr-writer.md` — Architecture Decision Records
@@ -425,7 +425,7 @@ Deep analysis     → Use Opus (thinking on by default)
 ## FAQ
 
 **Q: What is the Claude Code Ultimate Guide?**
-A: The most comprehensive community guide for Claude Code (Anthropic's CLI). 24,600+ lines of documentation, 227 production-ready templates, 271-question quiz, and security threat database. Free and open-source (CC BY-SA 4.0).
+A: The most comprehensive community guide for Claude Code (Anthropic's CLI). 25,100+ lines of documentation, 246 production-ready templates, 334-question quiz, and security threat database. Free and open-source (CC BY-SA 4.0).
 
 **Q: Is this guide free?**
 A: Yes, completely free. The guide is CC BY-SA 4.0 (share and adapt with attribution). Templates are CC0 (copy-paste freely, no attribution needed). No paywall, no login required.
@@ -495,7 +495,7 @@ claude-code-ultimate-guide/
 │   ├── reference.yaml              # Machine-optimized index (~2K tokens)
 │   └── llms.txt                    # Short version
 ├── whitepapers/                    # 9 focused PDFs (FR + EN)
-└── quiz/                           # 271-question interactive quiz
+└── quiz/                           # 334-question interactive quiz
 ```
 
 ---

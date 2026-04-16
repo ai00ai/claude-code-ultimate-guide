@@ -6,11 +6,11 @@
 
 - Title: Claude Code Ultimate Guide
 - Author: Florian Bruniaux (Founding Engineer @ Méthode Aristote)
-- Version: 3.38.17
+- Version: 3.39.0
 - Last Updated: April 16, 2026
 - License: CC BY-SA 4.0 (free, open source)
-- Lines of Documentation: 24,800+
-- Production Templates: 240
+- Lines of Documentation: 25,100+
+- Production Templates: 246
 - Quiz Questions: 334
 
 ## What This Guide Covers
@@ -40,7 +40,7 @@
 - Landing site: https://cc.bruniaux.com
 
 ### For Templates
-- 240 Production Templates: https://github.com/FlorianBruniaux/claude-code-ultimate-guide/tree/main/examples
+- 246 Production Templates: https://github.com/FlorianBruniaux/claude-code-ultimate-guide/tree/main/examples
 - Agents: backend-architect, security-guardian, code-reviewer, debugger, devops-sre, adr-writer
 - Commands: /pr, /commit, /release-notes, /diagnose, /generate-tests, /optimize, /git-worktree
 - Hooks: dangerous-actions-blocker, prompt-injection-detector, secrets-scanner (bash + PowerShell)

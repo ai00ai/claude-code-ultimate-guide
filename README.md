@@ -8,7 +8,7 @@
 <!-- Stats -->
 <p align="center">
   <a href="https://github.com/FlorianBruniaux/claude-code-ultimate-guide/stargazers"><img src="https://img.shields.io/github/stars/FlorianBruniaux/claude-code-ultimate-guide?style=for-the-badge" alt="Stars"/></a>
-  <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/Updated-Apr_16,_2026_·_v3.38.17-brightgreen?style=for-the-badge" alt="Last Update"/></a>
+  <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/Updated-Apr_16,_2026_·_v3.39.0-brightgreen?style=for-the-badge" alt="Last Update"/></a>
   <a href="./quiz/"><img src="https://img.shields.io/badge/Quiz-271_questions-orange?style=for-the-badge" alt="Quiz"/></a>
   <a href="./examples/"><img src="https://img.shields.io/badge/Templates-228-green?style=for-the-badge" alt="Templates"/></a>
 </p>
@@ -772,6 +772,7 @@ Use this guide critically. Experiment. Share what works for you.
 | **[Search Tools Cheatsheet](./guide/cheatsheet.md)** | Grep, Serena, ast-grep, grepai comparison | 5 min |
 | **[Learning with AI](./guide/roles/learning-with-ai.md)** | Use AI without becoming dependent | 15 min |
 | **[Claude Code Releases](./guide/core/claude-code-releases.md)** | Official release history | 10 min |
+| **[Credits](./guide/core/credits.md)** | Open-source inspirations and pattern attributions | 2 min |
 
 <details>
 <summary><strong>Examples Library</strong> (228 templates)</summary>
@@ -916,7 +917,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ---
 
-*Version 3.38.17 | Updated daily · Apr 16, 2026 | Crafted with Claude*
+*Version 3.39.0 | Updated daily · Apr 16, 2026 | Crafted with Claude*
 
 <!-- SEO Keywords -->
 <!-- claude code, claude code tutorial, anthropic cli, ai coding assistant, claude code mcp,

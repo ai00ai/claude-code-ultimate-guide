@@ -1245,6 +1245,68 @@ When adding a new server:
 
 ---
 
+## Documenting an MCP for Claude: The Reference File Pattern
+
+When you integrate an MCP server into a skill, Claude has to figure out the query syntax, required parameter combinations, and quirky behavior on its own. For simple MCPs this is fine. For anything production-facing (observability tools, project management APIs, log aggregators), it breaks down fast. Claude guesses at parameter format, gets a cryptic error, retries with a different guess, and burns your budget on noise.
+
+The fix from the Packmind engineering team (open-sourced under Apache 2.0): add a `references/<mcp-name>.md` file alongside the skill, and have the skill read it as its first step before any MCP call.
+
+### What Goes in the Reference File
+
+Three types of content that Claude cannot reliably infer on its own:
+
+**1. Parameter semantics that differ from the tool name**
+
+For example, a Datadog "search" tool that uses Datadog query syntax (not regex). Or a Sentry tool that requires an `organization_slug` (the URL slug, not the display name). These are not bugs in the MCP; they are just non-obvious.
+
+**2. Known error patterns and what triggers them**
+
+For example: "If you use `SELECT` aliases in `GROUP BY` with DDSQL, you get a cryptic error. Repeat the full expression instead." This turns a 10-minute debug session into a zero-second lookup.
+
+**3. Working query examples for the 80% case**
+
+Copy-paste examples that cover the most common queries. Claude can adapt them rather than constructing from scratch.
+
+### File Structure
+
+```
+.claude/skills/my-mcp-skill/
+├── SKILL.md                    # Main skill file
+└── references/
+    └── <mcp-name>.md           # MCP reference file (this pattern)
+```
+
+The SKILL.md reads the reference file in its first step:
+
+```markdown
+## Step 1: Read the MCP Reference File
+
+Before doing anything else, read `references/<mcp-name>.md`.
+This contains the query syntax and known gotchas for this MCP.
+Do not skip this step.
+```
+
+### Why This Works
+
+The reference file is not documentation for humans. It is a structured context injection. Every piece of information in it reduces the probability of a malformed MCP call by Claude. Done well, it eliminates retry loops caused by syntax errors and makes the skill reliable enough to run on a schedule without supervision.
+
+This pattern generalizes to any MCP with non-obvious behavior: Datadog, Sentry, PagerDuty, Linear, Jira, Mixpanel, Posthog. If the MCP has a query language, pagination quirks, or required parameters with non-intuitive names, a reference file pays for itself in the first run.
+
+### Fork-Ready Template
+
+A complete template skill demonstrating this pattern (with a Sentry example) is available at:
+
+`examples/skills/mcp-integration-reference/` in this repository
+
+The template includes:
+- `SKILL.md` with the 5-step structure (read reference, gather scope, fetch, analyze, report)
+- `references/sentry-mcp.md` with complete parameter docs, gotchas, query examples, and noise exclusion list
+- Instructions for adapting to any MCP server
+
+> Inspired by the Datadog MCP reference file from the [Packmind open-source repo](https://github.com/packmind/packmind) (Apache 2.0, Cédric Teyton). See [Credits](../core/credits.md) for full attribution.
+
+---
+
 ## Excluded Servers
 
 Servers evaluated but not included in the validated list:

@@ -6,6 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [3.39.0] - 2026-04-16
+
+### Added
+
+- **Skeptical Reviewer Pattern** (`guide/ultimate-guide.md` §9.20 Agent Teams): New subsection documenting the four-agent pipeline design where a dedicated "skeptical reviewer" sub-agent filters false positives from parallel audit agents. Includes false-positive criteria, evidence requirement rule, KEEP/REJECT log pattern, and connection to Swarm Mode. Inspired by the Packmind playbook-audit open-source skill (Apache 2.0, Cédric Teyton).
+
+- **MCP Reference File Pattern** (`guide/ecosystem/mcp-servers-ecosystem.md`): New section "Documenting an MCP for Claude: The Reference File Pattern" explaining how a `references/<mcp-name>.md` file injected before any MCP call reduces query failures from syntax gotchas, non-obvious parameter semantics, and rate limit behavior. Includes the three content types, file structure, and link to the fork-ready template.
+
+- **`examples/skills/mcp-integration-reference/SKILL.md`**: Fork-ready template skill demonstrating the MCP reference file pattern. Five-step structure: read reference file, gather scope, fetch data, group and analyze, generate report. Designed to be adapted for any MCP server (Sentry, Datadog, PagerDuty, Linear, etc.).
+
+- **`examples/skills/mcp-integration-reference/references/sentry-mcp.md`**: Complete Sentry MCP reference file template. Covers available tools with full parameter semantics, DDSQL-equivalent query syntax gotchas, pagination approach, known noise exclusion patterns, and five working query examples. Serves as the canonical example of what a good MCP reference file looks like.
+
+- **`guide/core/credits.md`**: New file centralizing attributions for patterns borrowed from open-source engineering work. Current entries: Packmind (6 patterns, Apache 2.0, Cédric Teyton) and Anthropic skill-creator. Linked from README and cited inline at each pattern section.
+
+- **`guide/core/skill-design-patterns.md`**: New reference file covering 6 architectural patterns for multi-agent and multi-file skills: Shared Ground Truth Injection, Pre-filtered References via Frontmatter Paths, Detection-Only Scope Boundary, Input-Handler Dispatch, Versioned Sub-directories for Tool-Version Coupling, and Two-Tier Standards. Each pattern includes the problem it solves, the pattern structure, token trade-offs, and when to apply it. Linked from README.
+
+- **Handoff Triad Pattern** (`guide/ultimate-guide.md` §2 Session Handoff Pattern): New subsection after the existing handoff template documenting the three-command protocol (`create`, `resume`, `update`) with per-section merge rules. Key addition: append-only Work Done log creates an auditable history across sessions. Includes the merge rules table and link to fork-ready templates.
+
+- **`examples/commands/handoff/create-handoff.md`**: Fork-ready template for session handoff creation. Generates `claudedocs/handoffs/handoff_YYYYMMDD_HHMMSS.md` with 8 structured sections. Includes explicit rules: append-only Work Done, `path:line` format for file references, 600-word target for quick loading.
+
+- **`examples/commands/handoff/resume-handoff.md`**: Fork-ready template for loading a handoff document. Parses all sections, summarizes understanding in 3-5 bullets, and requires explicit user confirmation before starting work.
+
+- **`examples/commands/handoff/update-handoff.md`**: Fork-ready template implementing the full merge rules table (keep/append/replace per section). Includes the fallback to new-file creation when no existing handoff is found, and per-step confirmation output.
+
+- **Recipe Template: Context Validation Checkpoints** (`guide/ultimate-guide.md` §6.3 Command Template): New subsection after the existing command template documenting the checkpoint pattern: a checklist of preconditions Claude must verify before executing recipe steps. Prevents mid-step failures in one-way operations.
+
+- **`examples/commands/recipe-template.md`**: Fork-ready template demonstrating the Context Validation Checkpoints pattern. Includes the checkpoints section, numbered recipe steps with per-step validation, error handling table, and adaptation notes.
+
+- **Plans and Specs as Committed Artifacts** (`guide/core/skill-design-patterns.md`): New section (M4 pattern) documenting the practice of committing plan/spec pairs under `.claude/` as dated markdown files (`YYYY-MM-DD-<slug>.md` + `YYYY-MM-DD-<slug>-design.md`). Covers why it beats session-only plans (grep-able, resume-able, captures rationale), when to use it, and the naming convention. Inspired by the Packmind `.claude/plans/` convention (Apache 2.0).
+
+- **`examples/scripts/statusline.py`**: Fork-ready context bar script for Claude Code's `statusCommand` setting. Displays a color-coded progress bar (green/yellow/red), context percentage, git branch, and model name. Key insight documented with inline comments: subtracts 32,000 tokens from the total context window to compute the effective input window (output buffer reservation). Adapted from Packmind's `.claude/statusline.py` (Apache 2.0).
+
+- **`machine-readable/reference.yaml`**: Added 20+ entries for all Packmind pattern integrations: `skill_design_patterns_*` (7 patterns), `mcp_reference_file_*`, `skeptical_reviewer_*`, `handoff_triad_*`, `recipe_template_*`, `statusline_*`, and `credits_guide`.
+
+### Changed
+
+- **`tools/audit-prompt.md` v5.0 — orchestrator architecture** (`tools/audit-prompt.md`): Rewrote from a flat 130+ checkbox checklist into an 8-dimension weighted orchestrator (100 pts). The prompt now delegates each domain to a specialized skill or command if installed (eval-skills, eval-rules, token-audit, audit-agents-skills, security-check), with inline bash fallback when not available. New dimensions: Memory & Context (20 pts, delegates to `/token-audit`), Rules Hygiene (10 pts, delegates to `/eval-rules`), Skills Quality (10 pts, delegates to `/eval-skills`), Agents/Commands Quality (10 pts, delegates to `/audit-agents-skills`), Security Posture (20 pts, delegates to `/security-check`), MCP Ecosystem (10 pts), Workflow Commands (10 pts), Freshness & Best Practices (10 pts). Phase 1 replaces 3 separate bash blocks with one unified inventory scan. Phase 3 produces an 8-row scorecard instead of a flat findings table. Added `--include-global` scope flag, "Deepen Your Audit" section with install commands for all delegated skills, and 10 new glossary terms (Context Budget, Rules auto-loaded, paths: frontmatter, effort: field, argument-hint, Hook Profiles, Threat Database, Cache Bug #40524, managed-settings.d/, Routines). Version updated from 4.0 (guide v3.37.6) to 5.0 (guide v3.38.17+).
+
 ### Fixed
 
 - **Architecture.md broken image** (`guide/core/architecture.md`): Replaced missing `./images/claude-code-architecture-overview.jpeg` (file never committed) with a Mermaid flowchart showing Claude Code as an orchestration layer over Claude models and the development environment. Attribution to Mohamed Ali Ben Salem preserved as a text link. Fixes [#25](https://github.com/FlorianBruniaux/claude-code-ultimate-guide/issues/25).

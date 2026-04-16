@@ -16,7 +16,7 @@ tags: [guide, reference, workflows, agents, hooks, mcp, security]
 
 **Last updated**: January 2026
 
-**Version**: 3.38.17
+**Version**: 3.39.0
 
 ---
 
@@ -2731,6 +2731,31 @@ You: "Create a session handoff document for what we accomplished today"
 
 Claude will analyze git status, conversation history, and generate a structured handoff.
 
+**Handoff Triad Pattern**: For teams or multi-session workflows, a three-command protocol adds explicit merge semantics on top of the basic handoff. Three commands work together:
+
+| Command | Job |
+|---------|-----|
+| `/handoff:create` | Generates the structured document from current session context |
+| `/handoff:resume` | Loads a handoff document, confirms understanding, and waits for approval before starting |
+| `/handoff:update` | Updates an existing handoff with section-specific merge rules (see below) |
+
+The critical addition is per-section merge rules in `update`:
+
+| Section | Merge Rule |
+|---------|------------|
+| Task, Scope | Keep or refine |
+| Files | Merge — combine original with new files touched |
+| Discoveries | Append — add new findings, never remove prior ones |
+| Work Done | **Append only** — add new entries, never delete history, include commit hashes |
+| Status | Replace — write current state |
+| Next Steps | Replace — write updated checklist |
+
+The append-only Work Done section creates an audit trail across sessions. Even if earlier work was revised, the revision appears as a new entry rather than an overwrite.
+
+Fork-ready templates at `examples/commands/handoff/` in this repo.
+
+> Pattern inspired by [Packmind's handoff command triad](https://github.com/packmind/packmind) (Apache 2.0). See [Credits](./core/credits.md).
+
 ## 2.3 Plan Mode
 
 Plan Mode is Claude Code's "look but don't touch" mode.
@@ -5443,7 +5468,7 @@ The `.claude/` folder is your project's Claude Code directory for memory, settin
 | Personal preferences | `CLAUDE.md` | ❌ Gitignore |
 | Personal permissions | `settings.local.json` | ❌ Gitignore |
 
-### 3.38.17 Version Control & Backup
+### 3.39.0 Version Control & Backup
 
 **Problem**: Without version control, losing your Claude Code configuration means hours of manual reconfiguration across agents, skills, hooks, and MCP servers.
 
@@ -9299,6 +9324,28 @@ Output: [Expected result]
 If [error condition]:
 - [Recovery action]
 ```
+
+### Recipe Template: Context Validation Checkpoints
+
+The standard template above works well for workflow commands. For commands that are procedurally risky (deploy flows, data migrations, one-way operations), add a "Context Validation Checkpoints" section before the steps:
+
+```markdown
+## Context Validation Checkpoints
+
+Before executing any step, verify all of these are true.
+If any checkpoint fails, stop and explain why.
+
+* [ ] Target branch exists and is up to date with main
+* [ ] No uncommitted changes in the affected files
+* [ ] Required config file exists at path X
+* [ ] Credentials or permissions are available
+```
+
+The checklist forces explicit precondition verification rather than letting Claude discover failures mid-execution. A failed checkpoint produces a clear error with a fixable reason; a mid-step failure produces a partial state that is harder to recover from.
+
+Fork-ready template at `examples/commands/recipe-template.md` in this repo.
+
+> Pattern from [Packmind command files](https://github.com/packmind/packmind) (Apache 2.0). See [Credits](./core/credits.md).
 
 ## 6.4 Command Examples
 
@@ -22053,6 +22100,56 @@ This is distinct from Agent Teams: there is no persistent team structure, no sha
 
 **Rule of thumb**: Use Agent Teams for workflows with sequential dependencies (agent A's output feeds agent B). Use Swarm when each reviewer can work from the same starting point and you want maximum coverage with minimum setup overhead.
 
+### Pattern: Skeptical Reviewer Sub-Agent
+
+Standard multi-agent pipelines have a systematic flaw: audit agents over-report. When you ask three sub-agents to find contradictions, duplications, or coverage gaps in a set of artifacts, they will find them everywhere, including in patterns that are intentional, complementary, or simply not conflicting.
+
+The solution is a fourth agent whose only job is to reject false positives from the first three.
+
+**How it works**:
+
+```
+Phase 1: Artifact inventory (orchestrator builds the inventory)
+Phase 2: Pairwise analysis (3 agents in parallel, each owns one pair-type)
+          ├── Agent A: standards vs skills
+          ├── Agent B: standards vs commands
+          └── Agent C: skills vs commands
+Phase 3: Skeptical review (1 agent reviews all raw findings)
+          └── Applies false-positive filter criteria
+          └── Produces KEEP/REJECT log + final report
+```
+
+The skeptical reviewer agent operates with explicit anti-hallucination rules. From the Packmind [playbook-audit implementation](https://github.com/packmind/packmind):
+
+> "Be skeptical. Audit agents tend to over-report; your job is to filter. A 50%+ rejection rate is normal and healthy."
+
+**False positive criteria** the reviewer applies before keeping a finding:
+
+- **Intentional scope limits**: The artifacts address different scopes (all files vs migration files only) and do not actually conflict within the narrower scope
+- **Complementary content**: One artifact defines a rule, the other implements it; this is design, not duplication
+- **Different contexts**: The artifacts address different situations, even if they use similar language
+- **Trivial overlap**: Both mention the same concept but neither prescribes conflicting rules about it
+- **Delegation pattern**: A command invoking a skill (or vice versa) is complementary, not a gap or contradiction
+
+**Evidence requirement**: The reviewer only keeps a finding when it can point to specific passages in *both* artifacts. No evidence from both sides, no finding.
+
+**Detection-only scope**: The skeptical reviewer produces a report. It does not modify any artifact. Fixing is a separate step triggered by a human reading the report.
+
+**When to apply this pattern**:
+
+| Situation | Apply? |
+|-----------|--------|
+| Auditing a set of N artifacts for cross-artifact consistency | Yes |
+| Running a doc-vs-codebase audit across many files | Yes |
+| Code review where you want coverage, not noise | Yes |
+| Single-agent analysis of one file | No |
+
+**Connection to Swarm Mode**: Swarm Mode (above) sends the same input to multiple reviewers in parallel for coverage. The Skeptical Reviewer pattern adds a synthesis layer that *filters* swarm output before surfacing it. They compose naturally: run the swarm, pipe its output through the skeptical reviewer.
+
+> Pattern source: [Packmind playbook-audit skill](https://github.com/packmind/packmind) (Apache 2.0, Cédric Teyton). See [Credits](./core/credits.md).
+
+---
+
 ### Practitioner Testimonial
 
 **Paul Rayner** (CEO Virtual Genius, EventStorming Handbook author):
@@ -25019,4 +25116,4 @@ We'll evaluate and add it to this section if it meets quality criteria.
 
 **Contributions**: Issues and PRs welcome.
 
-**Last updated**: January 2026 | **Version**: 3.38.17
+**Last updated**: January 2026 | **Version**: 3.39.0
